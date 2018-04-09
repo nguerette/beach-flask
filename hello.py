@@ -5,12 +5,14 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "Hello Furld!"
+    resp = app.make_response("Hello Furld!")
+    resp.headers['Content-Type'] = 'text/plain; charset=utf-8'
+    return resp
 
 
 try:
     port = int(os.getenv('PORT'))
-except ValueError:
+except (TypeError, ValueError):
     port = 5000
 
 if __name__ == "__main__":
